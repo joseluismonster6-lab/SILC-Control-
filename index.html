@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control SILC — Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="index.html">Control SILC</a>
+        <nav class="topnav">
+          <a href="student.html">Aluno</a>
+          <a href="guardian.html">Encarregado</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container landing-page">
+      <section class="hero-card">
+        <p class="eyebrow">Sistema Escolar</p>
+        <h1>Painel de presença, boletins e notificações para escola e família</h1>
+        <p>Faça login conforme seu perfil para acessar dados seguros de alunos, encarregados e administração.</p>
+        <div class="button-group">
+          <a class="button button-primary" href="#loginForms">Acessar portal seguro</a>
+          <a class="button button-secondary" href="#loginForms">Entrar ou cadastrar</a>
+        </div>
+      </section>
+
+      <section class="card auth-panel" id="loginForms">
+        <div class="auth-status hidden" id="authStatus"></div>
+        <div class="auth-tab-header">
+          <button type="button" class="button button-secondary auth-tab-button active" data-panel="studentPanel">Aluno</button>
+          <button type="button" class="button button-secondary auth-tab-button" data-panel="guardianPanel">Encarregado</button>
+          <button type="button" class="button button-secondary auth-tab-button" data-panel="adminPanel">Administrador</button>
+        </div>
+
+        <div class="auth-panels">
+          <article id="studentPanel" class="auth-card auth-pane">
+            <div class="auth-card-header">
+              <h2>Aluno</h2>
+              <p>Clique em “Entrar como aluno” para acessar o portal do aluno.</p>
+            </div>
+            <button class="button button-primary" type="button" onclick="window.location.href='student.html'">Entrar como aluno</button>
+          </article>
+
+          <article id="guardianPanel" class="auth-card auth-pane hidden">
+            <div class="auth-card-header">
+              <h2>Encarregado</h2>
+              <p>Use o portal do encarregado para acessar dados do aluno com segurança.</p>
+            </div>
+            <button class="button button-primary" type="button" onclick="window.location.href='guardian.html'">Entrar como encarregado</button>
+          </article>
+
+          <article id="adminPanel" class="auth-card auth-pane hidden admin-card">
+            <div class="auth-card-header">
+              <h2>Administrador</h2>
+              <p>Login para monitorar solicitações, aprovar cadastros e acompanhar acessos.</p>
+            </div>
+            <button class="button button-primary" type="button" onclick="window.location.href='dashboard.html'">Entrar no dashboard</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="feature-grid" id="aboutFeatures">
+        <article class="feature-card">
+          <h2>Identificação</h2>
+          <p>Simule cartão RFID ou QR Code para registrar entradas e saídas automaticamente.</p>
+        </article>
+        <article class="feature-card">
+          <h2>Presença</h2>
+          <p>Registra horários de chegada e saída e mostra notificações de cada evento.</p>
+        </article>
+        <article class="feature-card">
+          <h2>Boletim</h2>
+          <p>Mostra notas, faltas e observações escolares para aluno e responsável.</p>
+        </article>
+        <article class="feature-card">
+          <h2>Notificações</h2>
+          <p>Envia avisos ao encarregado e permite justificativas de faltas em tempo real.</p>
+        </article>
+      </section>
+
+      <section class="info-panel">
+        <h2>Como usar</h2>
+        <ol>
+          <li>Escolha o painel do aluno ou do encarregado.</li>
+          <li>Selecione um aluno e veja todas as informações escolares.</li>
+          <li>Use os botões de presença para simular entrada e saída.</li>
+          <li>Leia notificações e envie justificativas de falta.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© Control SILC 2026. Protótipo simplificado de controle escolar.</p>
+      </div>
+    </footer>
+  </body>
+</html>

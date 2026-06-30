@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Encarregado — Control SILC</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="index.html">Control SILC</a>
+        <a class="button button-secondary" href="index.html">Voltar ao início</a>
+      </div>
+    </header>
+
+    <section id="guardianLoginGate" class="card auth-panel">
+      <div class="auth-card-header">
+        <h2>Login do encarregado</h2>
+        <p>Use os dados do aluno e seus dados para acessar o portal do encarregado.</p>
+      </div>
+      <form id="guardianLoginForm" class="auth-form">
+        <div class="form-field">
+          <label for="guardianLoginStudentId">ID do aluno</label>
+          <input id="guardianLoginStudentId" type="text" placeholder="ex.: joao-silva" />
+        </div>
+        <div class="form-field">
+          <label for="guardianLoginStudentName">Nome do aluno</label>
+          <input id="guardianLoginStudentName" type="text" placeholder="Nome do aluno" />
+        </div>
+        <div class="form-field">
+          <label for="guardianLoginStudentPassword">Senha do aluno</label>
+          <input id="guardianLoginStudentPassword" type="password" placeholder="Senha do aluno" />
+        </div>
+        <div class="form-field">
+          <label for="guardianLoginName">Nome do encarregado</label>
+          <input id="guardianLoginName" type="text" placeholder="Seu nome" />
+        </div>
+        <div class="form-field">
+          <label for="guardianLoginPhone">Telefone do encarregado</label>
+          <input id="guardianLoginPhone" type="text" placeholder="(11) 99999-9999" />
+        </div>
+        <div class="button-group">
+          <button class="button button-primary" type="submit">Entrar</button>
+          <button class="button button-secondary" type="button" onclick="window.location.href='index.html'">Voltar</button>
+        </div>
+        <p id="guardianLoginMessage" class="message"></p>
+      </form>
+    </section>
+
+    <main id="guardianPortal" class="container dashboard-page hidden">
+      <section class="panel-header">
+        <div>
+          <p class="eyebrow">Painel do encarregado</p>
+          <h1>Acompanhe entrada, saída, faltas e comunicados</h1>
+          <p>Receba alertas de presença do aluno, veja faltas, notas e envie justificativas quando necessário.</p>
+        </div>
+        <div class="status-box" id="guardianStatus">
+          <strong>Última notificação</strong>
+          <p>Selecione um aluno para ver os eventos mais recentes.</p>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <aside class="sidebar-card">
+          <div class="student-info card">
+            <h2>Aluno</h2>
+            <p><strong>Nome:</strong> <span id="guardianStudentName">-</span></p>
+            <p><strong>Responsável:</strong> <span id="guardianStudentGuardian">-</span></p>
+            <p><strong>Faltas:</strong> <span id="guardianStudentAbsences">-</span></p>
+            <p><strong>Saldo:</strong> <span class="balance" id="guardianStudentBalance">-</span></p>
+          </div>
+
+          <div class="card">
+            <label for="guardianStudentSelect">Trocar aluno</label>
+            <select id="guardianStudentSelect"></select>
+          </div>
+
+          <div class="card action-card">
+            <h2>Ações rápidas</h2>
+            <p>Use a aba de notificações para entender se o aluno entrou ou saiu da escola.</p>
+          </div>
+        </aside>
+
+        <section class="main-cards">
+          <div class="card card-grid-2">
+            <div>
+              <h2>Notificações de presença</h2>
+              <div id="guardianNotifications"></div>
+            </div>
+            <div>
+              <h2>Comunicados</h2>
+              <div id="guardianNotices"></div>
+            </div>
+          </div>
+
+          <div class="card card-grid-2">
+            <div>
+              <h2>Faltas e justificativas</h2>
+              <div id="guardianAbsenceList"></div>
+            </div>
+            <div>
+              <h2>Histórico de presença</h2>
+              <div id="guardianAttendanceLog"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Enviar relatório</h2>
+            <form id="guardianJustificationForm">
+              <label for="guardianJustificationReason">Descrição do relatório</label>
+              <textarea id="guardianJustificationReason" rows="4" placeholder="Descreva o relatório ou observação..."></textarea>
+              <button class="button button-primary" type="submit">Enviar relatório</button>
+              <p class="note" id="guardianJustificationMessage"></p>
+            </form>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© Control SILC 2026. Painel do encarregado.</p>
+      </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/guardian.js"></script>
+  </body>
+</html>

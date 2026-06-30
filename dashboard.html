@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control SILC — Plataforma</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="index.html">Control SILC</a>
+        <button class="button button-secondary" id="adminLogoutButton">Sair</button>
+      </div>
+    </header>
+
+    <main class="container dashboard-page">
+      <section id="adminGate" class="card auth-alert">
+        <h2>Acesso administrativo</h2>
+        <p>Informe a senha do administrador para abrir o painel.</p>
+        <form id="dashboardPasswordForm" class="auth-form">
+          <div class="form-field">
+            <label for="dashboardPassword">Senha do administrador</label>
+            <input id="dashboardPassword" type="password" placeholder="Senha de acesso" />
+          </div>
+          <button class="button button-primary" type="submit">Entrar no painel</button>
+          <p id="dashboardPasswordMessage" class="message"></p>
+        </form>
+      </section>
+
+      <div id="adminContent" class="hidden">
+        <section class="panel-header">
+        <div>
+          <p class="eyebrow">Plataforma escolar completa</p>
+          <h1>Administração, ensino e família conectados em um único sistema</h1>
+          <p>Gestão acadêmica, financeira, biblioteca, cantina e comunicação em um protótipo pronto para portfólio.</p>
+        </div>
+        <div class="status-box" id="dashboardStatus">
+          <strong>Visão geral do painel</strong>
+          <p>O painel interno mostra os principais indicadores de presença, finanças e comunicação.</p>
+        </div>
+      </section>
+
+      <section class="card admin-summary-card">
+        <div class="admin-summary-grid">
+          <div class="admin-card">
+            <strong id="pendingStudentsCount">0</strong>
+            <p>Solicitações de alunos</p>
+          </div>
+          <div class="admin-card">
+            <strong id="pendingGuardiansCount">0</strong>
+            <p>Solicitações de encarregados</p>
+          </div>
+          <div class="admin-card">
+            <strong id="activeStudentsCount">0</strong>
+            <p>Alunos aprovados</p>
+          </div>
+          <div class="admin-card">
+            <strong id="activeGuardiansCount">0</strong>
+            <p>Encarregados aprovados</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Solicitações pendentes</h2>
+          <div id="pendingRequests"></div>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Monitoramento</h2>
+          <div id="auditLog"></div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Adicionar novo aluno</h2>
+          <form id="studentAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="studentAddName">Nome do aluno</label>
+              <input id="studentAddName" type="text" placeholder="Nome completo" required />
+            </div>
+            <div class="form-field">
+              <label for="studentAddCard">Cartão RFID/QR</label>
+              <input id="studentAddCard" type="text" placeholder="RFID-XXX" required />
+            </div>
+            <div class="form-field">
+              <label for="studentAddPassword">Senha</label>
+              <input id="studentAddPassword" type="password" placeholder="Senha de acesso" required />
+            </div>
+            <div class="form-field">
+              <label for="studentAddGuardian">Encarregado responsável</label>
+              <input id="studentAddGuardian" type="text" placeholder="Nome do encarregado" required />
+            </div>
+            <div class="form-field">
+              <label for="studentAddGuardianPhone">Telefone do encarregado</label>
+              <input id="studentAddGuardianPhone" type="text" placeholder="(11) 99999-9999" required />
+            </div>
+            <button class="button button-primary" type="submit">Cadastrar aluno</button>
+            <p id="studentAddMessage" class="message"></p>
+          </form>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Adicionar novo encarregado</h2>
+          <form id="guardianAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="guardianAddStudent">Aluno associado</label>
+              <select id="guardianAddStudent" required></select>
+            </div>
+            <div class="form-field">
+              <label for="guardianAddName">Nome do encarregado</label>
+              <input id="guardianAddName" type="text" placeholder="Nome completo" required />
+            </div>
+            <div class="form-field">
+              <label for="guardianAddPhone">Telefone</label>
+              <input id="guardianAddPhone" type="text" placeholder="(11) 99999-9999" required />
+            </div>
+            <button class="button button-primary" type="submit">Cadastrar encarregado</button>
+            <p id="guardianAddMessage" class="message"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Alunos no sistema</h2>
+          <div id="studentManagementList"></div>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Encarregados no sistema</h2>
+          <div id="guardianManagementList"></div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Gestão de professores</h2>
+          <form id="teacherAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="teacherAddName">Nome</label>
+              <input id="teacherAddName" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="teacherAddUsername">Usuário</label>
+              <input id="teacherAddUsername" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="teacherAddPassword">Senha</label>
+              <input id="teacherAddPassword" type="password" required />
+            </div>
+            <div class="form-field">
+              <label for="teacherAddSubject">Disciplina</label>
+              <input id="teacherAddSubject" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="teacherAddPermissions">Permissões</label>
+              <input id="teacherAddPermissions" type="text" placeholder="notas, faltas, horarios" />
+            </div>
+            <button class="button button-primary" type="submit">Criar professor</button>
+            <p id="teacherAddMessage" class="message"></p>
+          </form>
+          <div id="teacherManagementList" class="management-stack"></div>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Gestão de turmas</h2>
+          <form id="classAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="classAddName">Nome da turma</label>
+              <input id="classAddName" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="classAddLevel">Nível</label>
+              <input id="classAddLevel" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="classAddRoom">Sala</label>
+              <input id="classAddRoom" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="classAddTeacher">Professor responsável</label>
+              <select id="classAddTeacher"></select>
+            </div>
+            <button class="button button-primary" type="submit">Criar turma</button>
+            <p id="classAddMessage" class="message"></p>
+          </form>
+          <div id="classManagementList" class="management-stack"></div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Gestão de disciplinas</h2>
+          <form id="subjectAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="subjectAddName">Nome da disciplina</label>
+              <input id="subjectAddName" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="subjectAddTeacher">Professor</label>
+              <select id="subjectAddTeacher"></select>
+            </div>
+            <button class="button button-primary" type="submit">Criar disciplina</button>
+            <p id="subjectAddMessage" class="message"></p>
+          </form>
+          <div id="subjectManagementList" class="management-stack"></div>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Gestão de horários</h2>
+          <form id="scheduleAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="scheduleAddClass">Turma</label>
+              <select id="scheduleAddClass" required></select>
+            </div>
+            <div class="form-field">
+              <label for="scheduleAddSubject">Disciplina</label>
+              <select id="scheduleAddSubject" required></select>
+            </div>
+            <div class="form-field">
+              <label for="scheduleAddTeacher">Professor</label>
+              <select id="scheduleAddTeacher" required></select>
+            </div>
+            <div class="form-field">
+              <label for="scheduleAddDay">Dia</label>
+              <input id="scheduleAddDay" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="scheduleAddTime">Hora</label>
+              <input id="scheduleAddTime" type="text" required />
+            </div>
+            <button class="button button-primary" type="submit">Criar horário</button>
+            <p id="scheduleAddMessage" class="message"></p>
+          </form>
+          <div id="scheduleManagementList" class="management-stack"></div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Avisos e comunicação</h2>
+          <form id="noticeAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="noticeAddTitle">Título</label>
+              <input id="noticeAddTitle" type="text" required />
+            </div>
+            <div class="form-field">
+              <label for="noticeAddMessage">Mensagem</label>
+              <textarea id="noticeAddMessage" rows="3" required></textarea>
+            </div>
+            <div class="form-field">
+              <label for="noticeAddAudience">Destinatários</label>
+              <input id="noticeAddAudience" type="text" placeholder="all, teachers, students" />
+            </div>
+            <button class="button button-primary" type="submit">Publicar aviso</button>
+            <p id="noticeAddMessage" class="message"></p>
+          </form>
+          <div id="noticeManagementList" class="management-stack"></div>
+        </div>
+        <div class="admin-panel-column">
+          <h2>Mensalidades e pagamentos</h2>
+          <form id="paymentAddForm" class="auth-form">
+            <div class="form-field">
+              <label for="paymentAddStudent">Aluno</label>
+              <select id="paymentAddStudent" required></select>
+            </div>
+            <div class="form-field">
+              <label for="paymentAddAmount">Valor</label>
+              <input id="paymentAddAmount" type="number" min="0" step="0.01" required />
+            </div>
+            <div class="form-field">
+              <label for="paymentAddStatus">Estado</label>
+              <select id="paymentAddStatus">
+                <option value="Pendente">Pendente</option>
+                <option value="Pago">Pago</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="paymentAddDueDate">Data limite</label>
+              <input id="paymentAddDueDate" type="date" required />
+            </div>
+            <button class="button button-primary" type="submit">Registar pagamento</button>
+            <p id="paymentAddMessage" class="message"></p>
+          </form>
+          <div id="paymentManagementList" class="management-stack"></div>
+        </div>
+      </section>
+
+      <section class="card admin-panel-grid">
+        <div class="admin-panel-column">
+          <h2>Relatórios e backup</h2>
+          <div id="reportSummary" class="management-stack"></div>
+          <button class="button button-secondary" id="backupButton" type="button">Exportar backup do sistema</button>
+        </div>
+      </section>
+
+      <section class="kpi-grid" id="kpiGrid"></section>
+
+      <section class="module-grid" id="moduleGrid"></section>
+
+      <section class="card detail-panel-grid">
+        <div class="detail-card">
+          <h2>Alunos aprovados</h2>
+          <div id="studentList"></div>
+        </div>
+        <div class="detail-card">
+          <h2>Encarregados aprovados</h2>
+          <div id="guardianList"></div>
+        </div>
+        <div class="detail-card">
+          <h2>Detalhes do módulo</h2>
+          <div id="moduleDetail" class="module-detail">
+            <p>Selecione um módulo para ver ou editar ações.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card communication-card">
+        <h2>Comunicação e calendário</h2>
+        <div class="communication-content">
+          <div>
+            <h3>Avisos gerais</h3>
+            <ul id="generalNotices" class="list-reset"></ul>
+          </div>
+          <div>
+            <h3>Calendário escolar</h3>
+            <ul id="calendarEvents" class="list-reset"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© Control SILC 2026. Demonstração de plataforma escolar integrada.</p>
+      </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
